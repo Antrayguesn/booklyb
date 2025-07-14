@@ -6,12 +6,28 @@ INIT_STRATEGIES = []
 
 SEQUENCES = {
     "GET": {
-        "/add_book/<string:isbn>": {
+        "/batch/fetch_book_information": {
             "STRATEGIES": [
-                {"CreateBookStrategy": ["isbn"]}
-
+                "FetchBookInformationStrategy"
+            ]
+        },
+        "/book/<string:id_to_find>": {
+            "STRATEGIES": [
+                {"GetBookStrategy": ["id_to_find"]}
+            ]
+        },
+        "/book_data/<string:isbn>": {
+            "STRATEGIES": [
+                {"GetBookDataStrategy": ["isbn"]}
+            ]
+        }
+    },
+    "POST": {
+        "/book/<string:isbn>": {
+            "STRATEGIES": [
+                {"CreateBookDataStrategy": ["isbn"]}
             ]
         },
 
-    },
+    }
 }

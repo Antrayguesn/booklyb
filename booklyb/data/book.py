@@ -16,5 +16,13 @@ class Book(Base):
     book_info_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("book_infos.id"), nullable=True)
 
     book_info: Mapped["BookInfo"] = relationship(
-        back_populates="books"
+        back_populates="books",
+        lazy="joined"
     )
+
+    def to_dict(self):
+        return {
+            "id": str(self.id),
+            "isbn": self.isbn,
+            "book_info_id": self.book_info_id
+        }

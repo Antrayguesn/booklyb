@@ -15,5 +15,13 @@ class Publisher(Base):
     name: Mapped[str] = mapped_column(String(150))
 
     book_infos: Mapped[List["BookInfo"]] = relationship(
-        secondary=publisher_book_infos_association_table, back_populates="publishers"
+        secondary=publisher_book_infos_association_table,
+        back_populates="publishers",
+        lazy="joined"
     )
+
+    def to_dict(self):
+        return {
+            "id": str(self.id),
+            "name": self.name
+        }

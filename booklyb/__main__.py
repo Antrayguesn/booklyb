@@ -10,6 +10,7 @@ from booklyb.strategies.strategy_manager import StrategyManager
 
 
 from booklyb.error.not_found_error import NotFoundError
+from booklyb.error.request_error import RequestError
 
 from booklyb.data.base import Base
 
@@ -43,6 +44,8 @@ for method, routes in SEQUENCES.items():
                     return jsonify(response)
                 except NotFoundError as e:
                     return {"error": str(e)}, 404
+                except RequestError as e:
+                    return {"error": str(e)}, 400
             return handler
         endpoint_name = f"{method}_{route.replace('/', '_')}".strip('_')
         app.route(route, methods=[method], endpoint=endpoint_name)(endpoint_function())

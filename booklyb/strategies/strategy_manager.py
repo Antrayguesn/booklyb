@@ -1,4 +1,7 @@
 from booklyb.strategies.create_book_strategy import CreateBookStrategy
+from booklyb.strategies.fetch_book_information_strategy import FetchBookInformationStrategy
+from booklyb.strategies.get_book_strategy import GetBookStrategy
+from booklyb.strategies.get_book_data_strategy import GetBookDataStrategy
 
 from booklyb.utils.singleton import Singleton
 from booklyb.data.log import log, INFO_END_PROCESS, INFO_LOADING_DATA, INFO_RUN_STRATEGIES
@@ -8,6 +11,9 @@ class StrategyManager(metaclass=Singleton):
     def __init__(self):
         self.SERVICE_CODE = "100"
         self.STRATEGIES = {CreateBookStrategy.__name__: CreateBookStrategy,
+                           FetchBookInformationStrategy.__name__: FetchBookInformationStrategy,
+                           GetBookStrategy.__name__: GetBookStrategy,
+                           GetBookDataStrategy.__name__: GetBookDataStrategy
                            }
 
     def run_sequence(self, sequence, **kwargs):
