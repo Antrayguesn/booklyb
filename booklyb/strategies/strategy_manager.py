@@ -1,7 +1,8 @@
-from booklyb.strategies.create_book_strategy import CreateBookStrategy
-from booklyb.strategies.fetch_book_information_strategy import FetchBookInformationStrategy
-from booklyb.strategies.get_book_strategy import GetBookStrategy
-from booklyb.strategies.get_book_data_strategy import GetBookDataStrategy
+from booklyb.strategies.book_info.fetch_book_information_strategy import FetchBookInformationStrategy
+from booklyb.strategies.book_info.get_book_data_strategy import GetBookDataStrategy
+
+from booklyb.strategies.book.create_book_strategy import CreateBookStrategy
+from booklyb.strategies.book.get_book_strategy import GetBookStrategy
 
 from booklyb.utils.singleton import Singleton
 from booklyb.data.log import log, INFO_END_PROCESS, INFO_LOADING_DATA, INFO_RUN_STRATEGIES

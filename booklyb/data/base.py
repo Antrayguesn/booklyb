@@ -8,8 +8,10 @@ from booklyb.data.database import engine
 class Base(DeclarativeBase):
     def save(self):
         with Session(engine) as session:
-            session.merge(self)
+            obj = session.merge(self)
             session.commit()
+            session.refresh(obj)
+            return obj
 
     @classmethod
     def find_by_id(cls, id_to_find):
@@ -22,6 +24,12 @@ class Base(DeclarativeBase):
     def find(cls, **kwargs):
         with Session(engine) as session:
             query = select(cls).filter_by(**kwargs)
+            result = session.scalars(query)
+            return result.unique().all()
+
+    @classmethod
+    def execute_query(cls, query):
+        with Session(engine) as session:
             result = session.scalars(query)
             return result.unique().all()
 

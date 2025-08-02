@@ -21,5 +21,5 @@ class GetBookStrategy(Strategy):
 
         book = Book.find_by_id(uuid_to_find)
         if book is None:
-            raise NotFoundError(f"Unable to find th  book with id {id_to_find}")
+            raise NotFoundError(f"Unable to find the book with id {id_to_find}")
         return book.to_dict()

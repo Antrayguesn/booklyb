@@ -11,6 +11,7 @@ from booklyb.strategies.strategy_manager import StrategyManager
 
 from booklyb.error.not_found_error import NotFoundError
 from booklyb.error.request_error import RequestError
+from booklyb.error.internal_error import InternalServerError
 
 from booklyb.data.base import Base
 
@@ -46,6 +47,8 @@ for method, routes in SEQUENCES.items():
                     return {"error": str(e)}, 404
                 except RequestError as e:
                     return {"error": str(e)}, 400
+                except InternalServerError as e:
+                    return {"error": str(e)}, 500
             return handler
         endpoint_name = f"{method}_{route.replace('/', '_')}".strip('_')
         app.route(route, methods=[method], endpoint=endpoint_name)(endpoint_function())

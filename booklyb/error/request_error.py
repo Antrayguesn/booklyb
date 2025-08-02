@@ -4,3 +4,7 @@ class RequestError(Exception):
 
 class MalFormededUUID(RequestError):
     pass
+
+
+class NoISBNError(RequestError):
+    pass

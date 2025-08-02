@@ -11,18 +11,23 @@ from booklyb.data.base import Base
 
 class Book(Base):
     __tablename__ = "books"
+
     id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     isbn: Mapped[str] = mapped_column(String(13))
     book_info_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("book_infos.id"), nullable=True)
+    image_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("images.id"), nullable=True)
 
     book_info: Mapped["BookInfo"] = relationship(
         back_populates="books",
         lazy="joined"
     )
 
+    image: Mapped["Image"] = relationship(back_populates="book")
+
     def to_dict(self):
         return {
             "id": str(self.id),
             "isbn": self.isbn,
-            "book_info_id": self.book_info_id
+            "book_info_id": self.book_info_id,
+            "image_id": self.image_id
         }

@@ -23,9 +23,9 @@ SEQUENCES = {
         }
     },
     "POST": {
-        "/book/<string:isbn>": {
+        "/book": {
             "STRATEGIES": [
-                {"CreateBookDataStrategy": ["isbn"]}
+                {"CreateBookStrategy": ["request_data"]}
             ]
         },
 
